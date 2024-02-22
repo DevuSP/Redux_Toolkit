@@ -8,6 +8,7 @@ export const todoSlice = createSlice({
     name: "todo",
     initialState,             // value from data.
     reducers: {                // these are funcionalities. Must have whole function defined in these.
+        
         addTodo: (state, action) => {
             const todo = {
                 id: nanoid(),
@@ -15,9 +16,12 @@ export const todoSlice = createSlice({
             }
             state.todos.push(todo); // todos from initial state and todo from above. This is to save new todo.
         }, // state gives all the values in store.
-        removeTodo: (state, action) => {    // state contains data. Action contatins id to be removed.
+
+        removeTodo: (state, action) => {    // state contains data from initailstate. 
+            // Action contatins id to be removed sent through place where function is called from.
             state.todos = state.todos.filter((todo) => todo.id !== action.payload);
         },
+
         updateTodo: (state, action) => {
             state.todos = state.todos.map((element) => {
                 return element.id === action.payload.id ? { ...element, text: action.payload.text } : element;
